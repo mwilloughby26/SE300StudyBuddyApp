@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+public class studySetIO{
+	String studySetArr[][] = new String[50][50];
+	
+	public studySetIO(){
+		try {
+				FileReader fr = new FileReader("IntroToInfoSec.Ch11");
+				BufferedReader br = new BufferedReader(fr);
+				int i=0,j=0;
+				String line;
+	
+				while ((line = br.readLine()) != null) {
+					studySetArr[i][j] = line;
+					j++;
+					line = br.readLine();
+					studySetArr[i][j] = line;
+					j--;
+					i++;
+				}
+				br.close();
+		}catch(Exception e){
+			
+		}	
+	}
+	
+	String[][] getStudySet(){
+		return this.studySetArr;
+	}
+	
+}
