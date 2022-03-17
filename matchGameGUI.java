@@ -20,7 +20,7 @@ public class matchGameGUI extends BorderPane{
 		this.setCenter(centerPane); 
 		
 		backBTN.setOnAction(e -> {
-			AppMenuGUI appMenu = new AppMenuGUI();
+			StudyGUI appMenu = new StudyGUI();
 			this.setCenter(appMenu);
 			
 		});  

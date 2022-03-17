@@ -1,6 +1,5 @@
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -16,6 +15,7 @@ import javafx.stage.Popup;
 public class StudyGUI extends BorderPane{
 	
 	Pane centerPane = new Pane();
+	matchGameGUI matchGUI = new matchGameGUI();
 	
 	public StudyGUI() {
 		
@@ -175,6 +175,12 @@ public class StudyGUI extends BorderPane{
 			chLbl.setTranslateX(75);
 			chLbl.setTranslateY(20);
 			
+			Button exitBTN = new Button("X");
+			exitBTN.setStyle("-fx-background-color: #FFFFFF");
+			exitBTN.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+			exitBTN.setTranslateX(7);
+			exitBTN.setTranslateY(7);
+			
 			Button matchBTN = new Button("MATCH");
 			matchBTN.setStyle("-fx-background-color: #FFFFFF");
 			matchBTN.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -187,13 +193,33 @@ public class StudyGUI extends BorderPane{
 			typeBTN.setTranslateX(55);
 			typeBTN.setTranslateY(125);
 			
-			popupPane.getChildren().addAll(backgroundLbl,chLbl,matchBTN,typeBTN);
+			popupPane.getChildren().addAll(backgroundLbl,chLbl,matchBTN,typeBTN,exitBTN);
 			
 	        Popup popup = new Popup();
 	   
 	        popup.getContent().add(popupPane);
 	        
 	        popup.show(centerPane,600,300);
+	        
+	        exitBTN.setOnAction(r -> {
+				
+				popup.hide();
+	        	
+			});  
+	        
+	        matchBTN.setOnAction(r -> {
+				
+	        	popup.hide();
+	        	this.setCenter(matchGUI);
+				
+			});  
+	
+	        typeBTN.setOnAction(r -> {
+		
+	        	popup.hide();
+	        	
+		
+	        });  
 			
 		});  
 		
