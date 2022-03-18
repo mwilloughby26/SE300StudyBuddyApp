@@ -9,6 +9,7 @@ public class LoginGUI extends Application {
 	private SplashPaneGUI splashPane = new SplashPaneGUI();
 	private AppMenuGUI appPane = new AppMenuGUI();
 	private Button LoginBtn = new Button("LOGIN");
+	private Button quitBTN = new Button("X");
 
 	private Stage mainStage;
 
@@ -20,9 +21,15 @@ public class LoginGUI extends Application {
 			
 		});
 		
-		splashPane.setLoginBTN(LoginBtn);
+		quitBTN.setOnAction(e -> {
+			
+			primaryStage.close();
+			
+		});
+		
+		splashPane.setLoginBTN(LoginBtn,quitBTN);
 		splashPane.setLogoImage();
-
+		
 		topPane.setStyle("-fx-background-color: lightblue");
 		
 		Scene scene = new Scene(topPane, 800, 600);

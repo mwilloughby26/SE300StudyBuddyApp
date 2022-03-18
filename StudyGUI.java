@@ -15,7 +15,6 @@ import javafx.stage.Popup;
 public class StudyGUI extends BorderPane{
 	
 	Pane centerPane = new Pane();
-	matchGameGUI matchGUI = new matchGameGUI();
 	
 	public StudyGUI() {
 		
@@ -208,7 +207,7 @@ public class StudyGUI extends BorderPane{
 			});  
 	        
 	        matchBTN.setOnAction(r -> {
-				
+	        	matchGameGUI matchGUI = new matchGameGUI();
 	        	popup.hide();
 	        	this.setCenter(matchGUI);
 				

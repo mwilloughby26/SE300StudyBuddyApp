@@ -7,6 +7,8 @@ import javafx.scene.text.FontWeight;
 public class matchGameGUI extends BorderPane{
 	
 	Pane centerPane = new Pane();
+	studySetIO ssIO = new studySetIO();
+	
 	
 	public matchGameGUI() {
 		
@@ -20,11 +22,11 @@ public class matchGameGUI extends BorderPane{
 		this.setCenter(centerPane); 
 		
 		backBTN.setOnAction(e -> {
-			StudyGUI appMenu = new StudyGUI();
-			this.setCenter(appMenu);
+			StudyGUI StudyMenu = new StudyGUI();
+			this.setCenter(StudyMenu);
 			
 		});  
-		
+				
 	}
 	
 }

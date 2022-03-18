@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -59,10 +60,11 @@ public class AppMenuGUI extends BorderPane{
 		});
 		
 		logoutBTN.setOnAction(e -> {
-			
+		
 			SplashPaneGUI loginPane = new SplashPaneGUI();
 			Button LoginBtn = new Button("LOGIN");
-			loginPane.setLoginBTN(LoginBtn);
+			Button quitBTN = new Button("X");
+			loginPane.setLoginBTN(LoginBtn, quitBTN);
 			loginPane.setLogoImage();
 			this.setCenter(loginPane);
 			
@@ -71,6 +73,12 @@ public class AppMenuGUI extends BorderPane{
 				AppMenuGUI appPane = new AppMenuGUI();
 				this.setCenter(appPane);
 				
+			});
+			
+			quitBTN.setOnAction(r -> {
+				
+				Platform.exit();
+
 			});
 			
 		});
