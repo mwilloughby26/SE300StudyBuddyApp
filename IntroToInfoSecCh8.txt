@@ -1,0 +1,16 @@
+denial-of-service attack	
+an action that prevents or impairs the authorized use of networks, systems, or applications by exhausting resources such as CPU, memory, bandwidth and disk space
+flooding attack	
+The intent is to overload the network capacity on some link to a server, and may aim to overload the server's ability to handle and respond to traffic
+types of packets commonly used for flooding attacks
+ICMP, UDP or TCP SYN
+distributed denial-of-service attack	
+the use of multiple systems to generate attacks
+architecture of a distributed denial of service attack	
+a botnet consisting of infected zombie PCs is used, that is under the control of a hacker. Usually a small number of systems act as handlers
+a reflection attack	
+The attacker sends a network packet with a spoofed source address to a service running on some network server. The server responds to this packet, sending it to the spoofed source address that belongs to the actual attack target
+amplification attack	
+They differ to reflection attacks in that they are generating multiple response packets for each original packet sent. This can be achieved by directing the original request to the broadcast address for some network. As a result, all hosts will respond
+the primary defense against many DoS attacks	
+Limiting the ability of systems to send packets with spoofed source addresses. An ISP knows which addresses are allocated to all its customers and hence can ensure that valid source addresses are used in all packets from its customers.
