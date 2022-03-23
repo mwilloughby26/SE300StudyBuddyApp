@@ -42,7 +42,7 @@ public class CalanderPane extends VBox {
 	private HBox date7Events = new HBox();
 	
 	public CalanderPane() {
-		this.setStyle("-fx-background-color: blue");
+		//this.setStyle("-fx-background-color: blue");
 		this.setPrefSize(450, 600);
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().addAll(date1Pane,date2Pane,date3Pane,date4Pane,date5Pane,date6Pane,date7Pane);
