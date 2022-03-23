@@ -19,7 +19,7 @@ import java.util.Collections;
 
 public class ScheduleController {
 	
-	private ArrayList<CalanderEvent> events = new ArrayList<CalanderEvent>();
+//	private ArrayList<CalanderEvent> events = new ArrayList<CalanderEvent>();
 	private int currentDay;
 	private int currentMonth;
 	private int currentYear;
