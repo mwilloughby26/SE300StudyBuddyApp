@@ -1,0 +1,137 @@
+import java.util.List;
+import java.util.ArrayList;
+
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class reward_frogger extends Application{
+	private Pane root;
+	private AnimationTimer timer;
+	private Node frogger;
+	private List <Node> cars = new ArrayList<>();
+	//private List <Node> logs = new ArrayList<>();
+	//private List <Node> trains = new ArrayList<>();
+	
+	private Parent createContent() {
+		root = new Pane();
+		root.setPrefSize(800, 600);
+		frogger = initFrogger();
+		root.getChildren().add(frogger);
+		timer = new AnimationTimer() {
+		@Override
+		public void handle(long now) {
+			onUpdate();
+		}
+		};
+		return root;
+	}
+	
+	private Node initFrogger() {
+		Rectangle rectFrog = new Rectangle(38, 38, Color.GREEN);
+		rectFrog.setTranslateY(600 - 39);
+		return rectFrog;
+	}
+	private Node creatcars() {
+		Rectangle rectCars = new Rectangle(50, 50, Color.PURPLE);
+		rectCars.setTranslateY((int)(Math.random()*10)*35);
+		root.getChildren().add(rectCars);
+		return rectCars;
+	}
+	
+	private void onUpdate() {
+		for(Node Allcars: cars) {
+			Allcars.setTranslateX(Allcars.getTranslateX() + Math.random() * 9);
+			if(Math.random() < 0.075) {
+				cars.add(creatcars());
+			}
+			checkPoss();
+			
+		}
+	}
+	
+	private void checkPoss() {
+		for(Node cars: cars) {
+			if(cars.getBoundsInParent().intersects(frogger.getBoundsInParent())) {
+				frogger.setTranslateX(0);
+				frogger.setTranslateY(600-45);
+				return;
+			}
+		}
+		if(frogger.getTranslateY() <= 0) {
+			timer.stop();
+			String win = "YOU WIN!!!!!!";
+			HBox hbox = new HBox();
+			hbox.setTranslateX(400);
+			hbox.setTranslateY(300);
+			root.getChildren().add(hbox);
+			
+			for(int i = 0; i < win.toCharArray().length; i++) {
+				char letters = win.charAt(i);
+				Text speech = new Text(String.valueOf(letters));
+				speech.setFont(Font.font(40));
+				speech.setOpacity(0);
+				
+				hbox.getChildren().add(speech);
+				
+				FadeTransition tran = new FadeTransition(Duration.seconds(1), speech);
+				tran.setToValue(1);
+				tran.setDelay(Duration.seconds(1));
+				tran.play();
+			}
+		}
+	}
+	/*private Node creatLogs() {
+		Rectangle rectLogs = new Rectangle(70, 50, Color.BROWN);
+		rectLogs.setTranslateY((int)(Math.random()*10)*15);
+		root.getChildren().add(rectLogs);
+		return rectLogs;
+	}
+	private Node creatTrains() {
+		Rectangle rectTrain = new Rectangle(100, 50, Color.RED);
+		rectTrain.setTranslateY((int)(Math.random()*5)*15);
+		root.getChildren().add(rectTrain);
+		return rectTrain;
+	}*/
+	
+	@Override
+	public void start(Stage main_stage) throws Exception{
+		main_stage.setScene(new Scene(createContent()));
+		main_stage.getScene().setOnKeyPressed(event ->{
+			switch(event.getCode()) {
+			case W:
+				frogger.setTranslateY(frogger.getTranslateY()-50);
+			break;
+			case S:
+				frogger.setTranslateY(frogger.getTranslateY()+50);
+				break;
+			case A:
+				frogger.setTranslateX(frogger.getTranslateX()-50);
+				break;
+			case D:
+				frogger.setTranslateX(frogger.getTranslateX()+50);
+				break;
+				default:
+					break;
+			}
+				
+			});
+		main_stage.show();
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
