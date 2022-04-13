@@ -2,6 +2,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javafx.animation.Animation;
+import java.util.List;
+import java.util.ArrayList;
+
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -46,7 +50,7 @@ public class reward_frogger extends Application{
 	}
 	private Node creatcars() {
 		Rectangle rectCars = new Rectangle(50, 50, Color.PURPLE);
-		rectCars.setTranslateY((int)(Math.random()*10)*35);
+		rectCars.setTranslateY((int)(Math.random()*14)*40);
 		root.getChildren().add(rectCars);
 		return rectCars;
 	}
@@ -93,6 +97,7 @@ public class reward_frogger extends Application{
 			}
 		}
 	}
+	//Ignore, gold plating
 	/*private Node creatLogs() {
 		Rectangle rectLogs = new Rectangle(70, 50, Color.BROWN);
 		rectLogs.setTranslateY((int)(Math.random()*10)*15);
