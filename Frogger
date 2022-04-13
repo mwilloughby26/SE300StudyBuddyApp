@@ -2,10 +2,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javafx.animation.Animation;
-import java.util.List;
-import java.util.ArrayList;
-
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -15,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -29,7 +26,7 @@ public class reward_frogger extends Application{
 	//private List <Node> logs = new ArrayList<>();
 	//private List <Node> trains = new ArrayList<>();
 	
-	private Parent createContent() {
+	private Parent Content() {
 		root = new Pane();
 		root.setPrefSize(800, 600);
 		frogger = initFrogger();
@@ -44,12 +41,12 @@ public class reward_frogger extends Application{
 	}
 	
 	private Node initFrogger() {
-		Rectangle rectFrog = new Rectangle(38, 38, Color.GREEN);
-		rectFrog.setTranslateY(600 - 39);
-		return rectFrog;
+		Circle circFrog = new Circle(38, 38, 38, Color.GREEN);
+		circFrog.setTranslateY(600 - 39);
+		return circFrog;
 	}
 	private Node creatcars() {
-		Rectangle rectCars = new Rectangle(50, 50, Color.PURPLE);
+		Rectangle rectCars = new Rectangle(50, 50, Color.BLACK);
 		rectCars.setTranslateY((int)(Math.random()*14)*40);
 		root.getChildren().add(rectCars);
 		return rectCars;
@@ -113,7 +110,7 @@ public class reward_frogger extends Application{
 	
 	@Override
 	public void start(Stage main_stage) throws Exception{
-		main_stage.setScene(new Scene(createContent()));
+		main_stage.setScene(new Scene(Content()));
 		main_stage.getScene().setOnKeyPressed(event ->{
 			switch(event.getCode()) {
 			case W:
