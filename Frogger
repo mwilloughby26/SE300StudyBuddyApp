@@ -132,11 +132,11 @@ public class reward_frogger extends Application{
 	@Override
 	public void start(Stage main_stage) throws Exception{
 		VBox layout = new VBox(20);
-		Label label1 = new Label("Instructions: Use W,A,S,D keys to move.");
-		Button button1 = new Button("Play");
-		layout.getChildren().addAll(label1, button1);
-		scene1 = new Scene(layout, 200, 200);
-		button1.setOnAction(e -> setScene(main_stage));
+		//Label label1 = new Label("Instructions: Use W,A,S,D keys to move.");
+		//Button button1 = new Button("Play");
+		//layout.getChildren().addAll(label1, button1);
+		//scene1 = new Scene(layout, 200, 200);
+		//button1.setOnAction(e -> setScene(main_stage));
 		
 		main_stage.setScene(new Scene(createContent()));
 		main_stage.getScene().setOnKeyPressed(event ->{
@@ -161,10 +161,10 @@ public class reward_frogger extends Application{
 		main_stage.show();
 	}
 	
-	private Object setScene(Stage main_stage) {
+	/*private Object setScene(Stage main_stage) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	public static void main(String[] args) {
 		launch(args);
