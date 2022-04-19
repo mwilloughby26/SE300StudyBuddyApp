@@ -8,10 +8,12 @@ import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,39 +22,50 @@ import javafx.util.Duration;
 
 public class reward_frogger extends Application{
 	private Pane root;
+	Stage window;
+	Scene scene1;
 	private AnimationTimer timer;
 	private Node frogger;
 	private List <Node> cars = new ArrayList<>();
+	private List <Node> trucks = new ArrayList<>();
 	//private List <Node> logs = new ArrayList<>();
 	//private List <Node> trains = new ArrayList<>();
 	
-	private Parent Content() {
+	private Parent createContent() {
 		root = new Pane();
-		root.setPrefSize(800, 600);
-		frogger = initFrogger();
+		root.setPrefSize(900, 500);
+		frogger = createFrogger();
 		root.getChildren().add(frogger);
 		timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-			onUpdate();
+			UpdateCars();
+			updateTrucks();
 		}
 		};
+		timer.start();
 		return root;
 	}
 	
-	private Node initFrogger() {
-		Circle circFrog = new Circle(38, 38, 38, Color.GREEN);
-		circFrog.setTranslateY(600 - 39);
-		return circFrog;
+	private Node createFrogger() {
+		Rectangle rectFrog = new Rectangle(38, 38, Color.GREEN);
+		rectFrog.setTranslateY(500 - 39);
+		return rectFrog;
 	}
 	private Node creatcars() {
-		Rectangle rectCars = new Rectangle(50, 50, Color.BLACK);
+		Rectangle rectCars = new Rectangle(50, 50, Color.PURPLE);
 		rectCars.setTranslateY((int)(Math.random()*14)*40);
 		root.getChildren().add(rectCars);
 		return rectCars;
 	}
+	private Node creatTruck() {
+		Rectangle rectTruck = new Rectangle(80, 50, Color.RED);
+		rectTruck.setTranslateY((int)(Math.random()*14)*40);
+		root.getChildren().add(rectTruck);
+		return rectTruck;
+	}
 	
-	private void onUpdate() {
+	private void UpdateCars() {
 		for(Node Allcars: cars) {
 			Allcars.setTranslateX(Allcars.getTranslateX() + Math.random() * 9);
 			if(Math.random() < 0.075) {
@@ -62,12 +75,21 @@ public class reward_frogger extends Application{
 			
 		}
 	}
+	private void updateTrucks() {
+		for(Node allTrucks: trucks) {
+			allTrucks.setTranslateX(allTrucks.getTranslateX() + Math.random() * 9);
+		if(Math.random() >= .075 && Math.random() < 1 ) {
+			trucks.add(creatTruck());
+		}
+		checkPoss();
+	}
+	}
 	
 	private void checkPoss() {
 		for(Node cars: cars) {
 			if(cars.getBoundsInParent().intersects(frogger.getBoundsInParent())) {
 				frogger.setTranslateX(0);
-				frogger.setTranslateY(600-45);
+				frogger.setTranslateY(600-40);
 				return;
 			}
 		}
@@ -94,7 +116,6 @@ public class reward_frogger extends Application{
 			}
 		}
 	}
-	//Ignore, gold plating
 	/*private Node creatLogs() {
 		Rectangle rectLogs = new Rectangle(70, 50, Color.BROWN);
 		rectLogs.setTranslateY((int)(Math.random()*10)*15);
@@ -110,7 +131,14 @@ public class reward_frogger extends Application{
 	
 	@Override
 	public void start(Stage main_stage) throws Exception{
-		main_stage.setScene(new Scene(Content()));
+		VBox layout = new VBox(20);
+		Label label1 = new Label("Instructions: Use W,A,S,D keys to move.");
+		Button button1 = new Button("Play");
+		layout.getChildren().addAll(label1, button1);
+		scene1 = new Scene(layout, 200, 200);
+		button1.setOnAction(e -> setScene(main_stage));
+		
+		main_stage.setScene(new Scene(createContent()));
 		main_stage.getScene().setOnKeyPressed(event ->{
 			switch(event.getCode()) {
 			case W:
@@ -133,6 +161,11 @@ public class reward_frogger extends Application{
 		main_stage.show();
 	}
 	
+	private Object setScene(Stage main_stage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
