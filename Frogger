@@ -40,7 +40,7 @@ public class reward_frogger extends Application{
 		@Override
 		public void handle(long now) {
 			UpdateCars();
-			updateTrucks();
+			//updateTrucks();
 		}
 		};
 		timer.start();
@@ -58,12 +58,12 @@ public class reward_frogger extends Application{
 		root.getChildren().add(rectCars);
 		return rectCars;
 	}
-	private Node creatTruck() {
+/*	private Node creatTruck() {
 		Rectangle rectTruck = new Rectangle(80, 50, Color.RED);
 		rectTruck.setTranslateY((int)(Math.random()*14)*40);
 		root.getChildren().add(rectTruck);
 		return rectTruck;
-	}
+	}*/
 	
 	private void UpdateCars() {
 		for(Node Allcars: cars) {
@@ -75,7 +75,7 @@ public class reward_frogger extends Application{
 			
 		}
 	}
-	private void updateTrucks() {
+	/*private void updateTrucks() {
 		for(Node allTrucks: trucks) {
 			allTrucks.setTranslateX(allTrucks.getTranslateX() + Math.random() * 9);
 		if(Math.random() >= .075 && Math.random() < 1 ) {
@@ -83,7 +83,7 @@ public class reward_frogger extends Application{
 		}
 		checkPoss();
 	}
-	}
+	}*/
 	
 	private void checkPoss() {
 		for(Node cars: cars) {
@@ -131,7 +131,7 @@ public class reward_frogger extends Application{
 	
 	@Override
 	public void start(Stage main_stage) throws Exception{
-		VBox layout = new VBox(20);
+		//VBox layout = new VBox(20);
 		//Label label1 = new Label("Instructions: Use W,A,S,D keys to move.");
 		//Button button1 = new Button("Play");
 		//layout.getChildren().addAll(label1, button1);
