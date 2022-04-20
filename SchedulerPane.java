@@ -601,6 +601,23 @@ public class SchedulerPane extends Pane {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		CanvasIntegration canvas = new CanvasIntegration();
+		ArrayList<String> courses = canvas.getCourseIDs();
+		ArrayList<String> assignments = canvas.getAssignments(courses);
+		for (int i = 0; i < assignments.size()/2; i++) {
+			if (!(assignments.get(i*2+1).equals("null"))) {
+				System.out.println("Date:"+assignments.get(i*2+1));
+				CalanderEvent newEvent = new CalanderEvent();
+				newEvent.setName(assignments.get(i*2));
+				String[] assignmentDate = assignments.get(i*2+1).split("-");
+				System.out.println(assignmentDate.length);
+				//above line returns YYYY-MM-DD
+				newEvent.setDate(assignmentDate[1],assignmentDate[2], assignmentDate[0]);
+				this.eventList.add(newEvent);
+				updateCalander();
+				updateComboBox();
+			}
+		}
 		
 	}
 	private void saveAndExit() {
