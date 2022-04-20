@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class CanvasIntegration
 {
-	private String courseWebsite = "https://erau.instructure.com/api/v1/courses.json?all_events=true&per_page=100&access_token=2386~49TZj9vm1Nm4vHLJaqIJe9kE4MbHjMDDoLppJZeWVLWKCNeXPpdFopIUK7Jhm6XR"; 
+	private String token;
+	private String courseWebsite = "https://erau.instructure.com/api/v1/courses.json?all_events=true&per_page=100&access_token=" + token; 
 
-	//public void main(String[] args)
-	//{
-	//	getAssignments(getCourseIDs());
-	//}
+	public CanvasIntegration(String token) {
+		this.token = token;
+	}
 
 	public ArrayList<String> getCourseIDs()
 	{
@@ -108,5 +108,9 @@ public class CanvasIntegration
 		}
 
 		return combo;
+	}
+	
+	public void setToken(String token) {
+		this.token = token;
 	}
 }
