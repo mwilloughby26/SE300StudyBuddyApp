@@ -2,7 +2,7 @@
 // Class: TimeSchedulerPane
 // Author: Matthew Willoughby
 // Date Created: March 02, 2022
-// Date Modified: March 02, 2022
+// Date Modified: April 19, 2022
 //
 // Purpose: 
 //				
@@ -96,7 +96,7 @@ public class SchedulerPane extends Pane {
 	ComboBox<String> modifyEventListDropDown = new ComboBox<String>();
 	ComboBox<String> deleteEventListDropDown = new ComboBox<String>();
 	
-	public SchedulerPane() {
+	public SchedulerPane(Button backButton) {
 		//import data from csv
 		File eventDataFile = new File("EventData.csv");
 		importData(eventDataFile);
@@ -576,9 +576,7 @@ public class SchedulerPane extends Pane {
 
 			// read the header line in the file
 			line = br.readLine();
-			// print out header line 
-			System.out.println(line);
-
+			
 			// while line is equal to the next line of the bufferedreader is not equal to null
 			// this means read the next line in the file until there are not more line to read
 			while ((line = br.readLine()) != null) {
@@ -619,6 +617,7 @@ public class SchedulerPane extends Pane {
 		} catch (Exception e) {
 			
 		}
+		
 	}
 }
 	
