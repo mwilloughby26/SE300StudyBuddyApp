@@ -33,7 +33,7 @@ public class reward_frogger extends Application{
 		frogger = creatFrogger();
 		root.getChildren().add(frogger);
 		timer = new AnimationTimer() {
-		@Override
+		
 		public void handle(long start) {
 			update();
 		}
@@ -94,7 +94,7 @@ public class reward_frogger extends Application{
 			}
 		}
 	
-	@Override
+	
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
 		stage.setScene(new Scene(creatGame()));
@@ -117,9 +117,5 @@ public class reward_frogger extends Application{
 			}
 		});
 		stage.show();
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 }
