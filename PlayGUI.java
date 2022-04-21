@@ -16,6 +16,12 @@ public class PlayGUI extends BorderPane{
 		backBTN.setTranslateX(25);
 		backBTN.setTranslateY(15);
 		
+		Button RacerBTN = new Button("Racer");
+		RacerBTN.setStyle("-fx-background-color: #FFFFFF");
+		RacerBTN.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+		RacerBTN.setTranslateX(50);
+		RacerBTN.setTranslateY(30);
+		
 		centerPane.getChildren().addAll(backBTN);
 		this.setCenter(centerPane); 
 		
@@ -24,6 +30,12 @@ public class PlayGUI extends BorderPane{
 			this.setCenter(appMenu);
 			
 		});  
+		
+		RacerBTN.setOnAction(e -> {
+			reward_racer RacerObj = new reward_racer();
+			// RacerObj.start(null);
+			this.setCenter(RacerObj);
+		});
 		
 	}
 	
