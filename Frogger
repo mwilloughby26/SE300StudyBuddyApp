@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -22,150 +23,102 @@ import javafx.util.Duration;
 
 public class reward_frogger extends Application{
 	private Pane root;
-	Stage window;
-	Scene scene1;
 	private AnimationTimer timer;
+	private List<Node> objectCars = new ArrayList<>();
 	private Node frogger;
-	private List <Node> cars = new ArrayList<>();
-	private List <Node> trucks = new ArrayList<>();
-	//private List <Node> logs = new ArrayList<>();
-	//private List <Node> trains = new ArrayList<>();
 	
-	private Parent createContent() {
+	private Parent creatGame() {
 		root = new Pane();
-		root.setPrefSize(900, 500);
-		frogger = createFrogger();
+		root.setPrefSize(800,600);
+		frogger = creatFrogger();
 		root.getChildren().add(frogger);
 		timer = new AnimationTimer() {
 		@Override
-		public void handle(long now) {
-			UpdateCars();
-			//updateTrucks();
+		public void handle(long start) {
+			update();
 		}
-		};
-		timer.start();
+	};
+	timer.start();
 		return root;
 	}
-	
-	private Node createFrogger() {
-		Rectangle rectFrog = new Rectangle(38, 38, Color.GREEN);
-		rectFrog.setTranslateY(500 - 39);
-		return rectFrog;
+	private Node creatFrogger() {
+		Circle circFrog = new Circle(40,40,40, Color.GREEN);
+		circFrog.setTranslateY(600-40);
+		return circFrog;
+		
 	}
-	private Node creatcars() {
-		Rectangle rectCars = new Rectangle(50, 50, Color.PURPLE);
+	
+	private Node createCars() {
+		Rectangle rectCars = new Rectangle(40, 40, Color.BLACK);
 		rectCars.setTranslateY((int)(Math.random()*14)*40);
 		root.getChildren().add(rectCars);
 		return rectCars;
 	}
-/*	private Node creatTruck() {
-		Rectangle rectTruck = new Rectangle(80, 50, Color.RED);
-		rectTruck.setTranslateY((int)(Math.random()*14)*40);
-		root.getChildren().add(rectTruck);
-		return rectTruck;
-	}*/
-	
-	private void UpdateCars() {
-		for(Node Allcars: cars) {
-			Allcars.setTranslateX(Allcars.getTranslateX() + Math.random() * 9);
-			if(Math.random() < 0.075) {
-				cars.add(creatcars());
-			}
-			checkPoss();
-			
+	private void update() {
+		for(Node Allcars : objectCars)
+			Allcars.setTranslateX(Allcars.getTranslateX()+Math.random()*10);
+		if(Math.random() < 0.075) {
+			objectCars.add(createCars());
 		}
+		checkPos();
 	}
-	/*private void updateTrucks() {
-		for(Node allTrucks: trucks) {
-			allTrucks.setTranslateX(allTrucks.getTranslateX() + Math.random() * 9);
-		if(Math.random() >= .075 && Math.random() < 1 ) {
-			trucks.add(creatTruck());
-		}
-		checkPoss();
-	}
-	}*/
-	
-	private void checkPoss() {
-		for(Node cars: cars) {
-			if(cars.getBoundsInParent().intersects(frogger.getBoundsInParent())) {
+	public void checkPos() {
+		for (Node Allcars: objectCars) {
+			if(Allcars.getBoundsInParent().intersects(frogger.getBoundsInParent())) {
 				frogger.setTranslateX(0);
 				frogger.setTranslateY(600-40);
 				return;
 			}
 		}
-		if(frogger.getTranslateY() <= 0) {
-			timer.stop();
-			String win = "YOU WIN!!!!!!";
-			HBox hbox = new HBox();
-			hbox.setTranslateX(400);
-			hbox.setTranslateY(300);
-			root.getChildren().add(hbox);
-			
-			for(int i = 0; i < win.toCharArray().length; i++) {
-				char letters = win.charAt(i);
-				Text speech = new Text(String.valueOf(letters));
-				speech.setFont(Font.font(40));
-				speech.setOpacity(0);
+			if(frogger.getTranslateY() <= 0) {
+				String finished = "You crossed";
+				timer.stop();
+				HBox box = new HBox();
+				box.setTranslateX(350);
+				box.setTranslateX(350);
+				root.getChildren().add(box);
 				
-				hbox.getChildren().add(speech);
-				
-				FadeTransition tran = new FadeTransition(Duration.seconds(1), speech);
-				tran.setToValue(1);
-				tran.setDelay(Duration.seconds(1));
-				tran.play();
+				for(int i = 0; i < finished.toCharArray().length; i++) {
+					char letter = finished.charAt(i);
+					Text over = new Text(String.valueOf(letter));
+					over.setFont(Font.font(60));
+					over.setOpacity(0);
+					
+					box.getChildren().add(over);
+					
+					FadeTransition trans = new FadeTransition(Duration.seconds(1), over);
+					trans.setToValue(1);
+					trans.setDelay(Duration.seconds(i * 0.25));
+					trans.play();
+				}
 			}
 		}
-	}
-	/*private Node creatLogs() {
-		Rectangle rectLogs = new Rectangle(70, 50, Color.BROWN);
-		rectLogs.setTranslateY((int)(Math.random()*10)*15);
-		root.getChildren().add(rectLogs);
-		return rectLogs;
-	}
-	private Node creatTrains() {
-		Rectangle rectTrain = new Rectangle(100, 50, Color.RED);
-		rectTrain.setTranslateY((int)(Math.random()*5)*15);
-		root.getChildren().add(rectTrain);
-		return rectTrain;
-	}*/
 	
 	@Override
-	public void start(Stage main_stage) throws Exception{
-		//VBox layout = new VBox(20);
-		//Label label1 = new Label("Instructions: Use W,A,S,D keys to move.");
-		//Button button1 = new Button("Play");
-		//layout.getChildren().addAll(label1, button1);
-		//scene1 = new Scene(layout, 200, 200);
-		//button1.setOnAction(e -> setScene(main_stage));
-		
-		main_stage.setScene(new Scene(createContent()));
-		main_stage.getScene().setOnKeyPressed(event ->{
-			switch(event.getCode()) {
+	public void start(Stage stage) throws Exception {
+		// TODO Auto-generated method stub
+		stage.setScene(new Scene(creatGame()));
+		stage.getScene().setOnKeyPressed(event -> {
+			switch (event.getCode()) {
 			case W:
-				frogger.setTranslateY(frogger.getTranslateY()-50);
+				frogger.setTranslateY(frogger.getTranslateY()-40);
 			break;
 			case S:
-				frogger.setTranslateY(frogger.getTranslateY()+50);
-				break;
+				frogger.setTranslateY(frogger.getTranslateY()+40);
+			break;
 			case A:
-				frogger.setTranslateX(frogger.getTranslateX()-50);
-				break;
+				frogger.setTranslateX(frogger.getTranslateX()-40);
+			break;
 			case D:
-				frogger.setTranslateX(frogger.getTranslateX()+50);
-				break;
-				default:
-					break;
+				frogger.setTranslateX(frogger.getTranslateX()+40);
+			break;
+			default:
+			break;
 			}
-				
-			});
-		main_stage.show();
+		});
+		stage.show();
 	}
 	
-	/*private Object setScene(Stage main_stage) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
 	public static void main(String[] args) {
 		launch(args);
 	}
