@@ -22,6 +22,12 @@ public class PlayGUI extends BorderPane{
 		RacerBTN.setTranslateX(50);
 		RacerBTN.setTranslateY(30);
 		
+		Button froggerBTN = new Button("Frogger");
+		RacerBTN.setStyle("-fx-background-color: #FFFFFF");
+		RacerBTN.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+		RacerBTN.setTranslateX(75);
+		RacerBTN.setTranslateY(45);
+		
 		centerPane.getChildren().addAll(backBTN);
 		this.setCenter(centerPane); 
 		
@@ -37,6 +43,10 @@ public class PlayGUI extends BorderPane{
 			this.setCenter(RacerObj);
 		});
 		
+		froggerBTN.setOnAction(e -> {
+			reward_frogger froggerObj = new reward_frogger();
+			this.setCenter(froggerObj);
+		});
 	}
 	
 }
