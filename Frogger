@@ -26,6 +26,7 @@ public class reward_frogger extends Application{
 	private AnimationTimer timer;
 	private List<Node> objectCars = new ArrayList<>();
 	private Node frogger;
+	//private List<Node> logs = new ArrayList<>();
 	
 	private Parent creatGame() {
 		root = new Pane();
@@ -36,6 +37,7 @@ public class reward_frogger extends Application{
 		
 		public void handle(long start) {
 			update();
+			//updateLog();
 		}
 	};
 	timer.start();
@@ -54,6 +56,13 @@ public class reward_frogger extends Application{
 		root.getChildren().add(rectCars);
 		return rectCars;
 	}
+	/*private Node createLogs(){
+	Rectangle rectCars = new Rectangle(40, 40, Color.BROWN);
+		rectCars.setTranslateY((int)(Math.random()*14)*40);
+		root.getChildren().add(rectCars);
+		return rectCars;
+	}*/
+	
 	private void update() {
 		for(Node Allcars : objectCars)
 			Allcars.setTranslateX(Allcars.getTranslateX()+Math.random()*10);
@@ -62,6 +71,14 @@ public class reward_frogger extends Application{
 		}
 		checkPos();
 	}
+	/*private void updateLog(){
+	for(Node logs : log)
+			logs.setTranslateX(logs.getTranslateX()+Math.random()*10);
+		if(Math.random() < 0.075) {
+			creatLog.add(createLogs());
+		}
+		checkPos();
+	}*/
 	public void checkPos() {
 		for (Node Allcars: objectCars) {
 			if(Allcars.getBoundsInParent().intersects(frogger.getBoundsInParent())) {
